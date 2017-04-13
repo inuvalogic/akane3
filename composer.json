@@ -1,0 +1,11 @@
+{
+	"autoload" : {
+        "classmap" : ["app/"],
+        "psr-4" : {
+            "Akane\\" : "app/"
+        }
+    },
+    "require": {
+        "robmorgan/phinx": "^0.6.4"
+    }
+}

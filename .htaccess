@@ -1,0 +1,26 @@
+Header set Cache-Control "max-age=2592000"
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [NC,L,QSA]
+</IfModule>
+
+<FilesMatch "\.(ttf|otf|eot|svg|woff)$">
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+    </IfModule>
+</FilesMatch>
+
+<ifModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/font-woff2
+</ifModule>
+
+<IfModule mod_headers.c>
+Header set Connection keep-alive
+Header always set X-FRAME-OPTIONS "DENY"
+Header always set X-XSS-Protection "1; mode=block"
+Header always set X-Content-Type-Options "nosniff"
+</IfModule>
