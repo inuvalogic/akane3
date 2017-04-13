@@ -10,7 +10,7 @@ a PHP based framework for all purpose website types
 
 ___
 
-### Instalation
+### Installation
 
 1. clone repo
 2. create database akane
@@ -21,14 +21,13 @@ $ composer install
 $ vendor/bin/phinx migrate
 ```
 
-### Running
+### Running on local
 
 use PHP built-in Server at your desired port
 
 ```sh
 $ php -S localhost:3000
 ```
-
 ___
 
 ## Contribute
