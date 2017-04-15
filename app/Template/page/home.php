@@ -4,4 +4,4 @@
 <p>Author: WebHade Creative &lt; <a href="http://www.webhade.id" target="_blank">www.webhade.id</a> &gt;</p>
 <p>a PHP based framework for all purpose website types</p>
 
-<a href="<?= __SITEURL__ ?>">home</a> &bull; <a href="<?= __SITEURL__ ?>/page/about">about us</a>
+<?= $this->render('menu'); ?>

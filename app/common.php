@@ -24,7 +24,4 @@ $classes = array(
     'Helper' => array(
         'Common',
     ),
-    'Model' => array(
-        'ArtikelModel',
-    ),    
 );

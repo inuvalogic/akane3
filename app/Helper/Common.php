@@ -4,7 +4,6 @@ namespace Akane\Helper;
 
 class Common
 {
-
 	public static function sizeFilter( $bytes )
 	{
 	    $label = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB' );

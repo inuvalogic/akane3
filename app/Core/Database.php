@@ -11,7 +11,7 @@ class Database
     public function init()
     {
         try {
-            $dbh = new PDO('mysql:host='.DB_HOSTNAME.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD, array(PDO::ATTR_PERSISTENT => true));
+            $dbh = new PDO(DB_DRIVER.':host='.DB_HOSTNAME.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD, array(PDO::ATTR_PERSISTENT => true));
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo = $dbh;
         } catch (\PDOException $e) {
