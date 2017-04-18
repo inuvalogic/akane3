@@ -22,4 +22,9 @@ class Layout extends \Akane\Core\Base
         return implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'Template', $template.'.php'));
     }
     
+    public function renderJson($output=array())
+    {
+        header('Content-type: application/json');
+        echo json_encode($output);
+    }
 }
