@@ -1,39 +1,69 @@
-## Akane Framework
+## Akane Framework<sup>v3</sup>
+
+*a PHP based framework for all purpose website types.*
+
+Sebuah Framework berbasis PHP untuk semua jenis website
 
 Version: 3.0
-
 Last Update: 2017-04-13
-
-Author: WebHade Creative [ http://www.webhade.id ]
-
-a PHP based framework for all purpose website types
-
+Author: [WebHade Creative](http://www.webhade.id)
 ___
 
-### Installation
+### Kebutuhan Minimum <a id="requirement"></a>
 
-1. clone repo
-2. create database akane
-3. running this command
+1. PHP 5.4 keatas
+2. MySQL / MariaDB
+3. Composer
+
+### Instalasi <a id="install"></a>
+
+1. clone repo dari Github ( [https://github.com/inuvalogic/akane3](https://github.com/inuvalogic/akane3) )
+2. buat database baru dengan nama `akane`
+3. jalankan command berikut
 
 ```sh
+$ cd akane3
 $ composer install
 $ vendor/bin/phinx migrate
+$ vendor/bin/phinx seed:run
 ```
 
-### Running on local
+### Running on Local <a id="running"></a>
 
-use PHP built-in Server at your desired port
+Untuk keperluan testing di local pc/laptop, Akane memakai `PHP built-in Server` dengan port tidak terpakai sesuai yang kamu inginkan. Misal pada port `3000`, jadi nanti akses Akane dari URL [http://localhost:3000/](http://localhost:3000/)
+Ketikan perintah berikut untuk menjalankan Akane:
 
 ```sh
+$ cd akane3
 $ php -S localhost:3000
 ```
+
+#### Running on Virtual Host (Apache atau Nginx)
+
+Selain menggunakan `PHP built-in Server`, Akane juga dapat disetting sebagai virtual host Apache atau Nginx. Apa kelebihannya? tentu saja Multi Threaded, tidak seperti PHP built-in server yang Single Threaded. Berikut contoh settingan minimal menjalankan `Akane` pada virtual host jika memakai XAMPP:
+
+*C:\xampp\apache\conf\extra\httpd-vhosts.conf*
+```apacheconf
+Listen 3000
+<VirtualHost *:3000>
+    DocumentRoot "C:/xampp/htdocs/akane3/"
+    ServerName localhost
+    ErrorLog "logs/akane-error.log"
+    CustomLog "logs/akane-access.log" common
+</VirtualHost>
+```
+
+### Running on Live / Production Server <a id="production"></a>
+
+`WARNING! DO WITH YOUR OWN RISK!`
+
+Untuk saat ini, `Akane Framework` tidak disarankan untuk dipakai pada Live Server, karena masih pada tahap development dan tingkat keamanannya masih jauh dibawah standar operasional.
 ___
 
-## Contribute
+## Contribute <a id="contribute"></a>
 
 Feel free to contribute to this project
 
 visit our site here
 
-www.webhade.id
+[www.webhade.id](www.webhade.id)
