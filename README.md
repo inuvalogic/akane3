@@ -64,6 +64,6 @@ ___
 
 Feel free to contribute to this project
 
-visit our site here
+kunjungi website kami untuk informasi lebih lanjut
 
 [akane.webhade.com](http://akane.webhade.com)
