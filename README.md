@@ -11,7 +11,7 @@ ___
 
 ### Kebutuhan Minimum
 
-1. PHP 5.4 keatas
+1. PHP 5.3.9 keatas
 2. MySQL / MariaDB
 3. Composer
 
