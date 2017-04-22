@@ -66,4 +66,4 @@ Feel free to contribute to this project
 
 visit our site here
 
-[www.webhade.id](www.webhade.id)
+[akane.webhade.com](http://akane.webhade.com)
