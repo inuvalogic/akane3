@@ -6,7 +6,18 @@ class BaseModel extends \Akane\Core\Base
 {
     const TABLE_NAME = '';
 
-	public function getData($sql, $data = false) {
+	public function all() {
+        $sql = "SELECT * FROM `" . $this->getTableName() . "`";
+        $q = $this->db->pdo->prepare($sql);
+        if ($data!=false){
+            $q->execute($data);
+        } else {
+            $q->execute();
+        }
+        return $q->fetchAll();
+    }
+
+    public function getData($sql, $data = false) {
         $q = $this->db->pdo->prepare($sql);
         if ($data!=false){
             $q->execute($data);
