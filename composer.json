@@ -1,11 +1,29 @@
 {
+    "name": "inuvalogic/akane3",
+    "description": "Akane a PHP based framework for all purpose website types.",
+    "keywords": ["akane", "framework"],
+    "homepage": "http://akane.webhade.com",
+    "type": "project",
+    "license": "MIT",
+    "authors": [{
+        "name": "Wisnu Hafid",
+        "email": "wisnuhafid@gmail.com",
+        "homepage": "http://wisnu-hafid.net",
+        "role": "Developer"
+    }],
+    "require": {
+        "php" : ">=5.3.9",
+        "ext-gd" : "*",
+        "ext-mbstring" : "*",
+        "ext-json" : "*",
+        "ext-filter" : "*",
+        "ext-session" : "*",
+        "robmorgan/phinx": "^0.6.4"
+    },
 	"autoload" : {
         "classmap" : ["app/"],
         "psr-4" : {
             "Akane\\" : "app/"
         }
-    },
-    "require": {
-        "robmorgan/phinx": "^0.6.4"
     }
 }
