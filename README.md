@@ -5,7 +5,7 @@
 Sebuah Framework berbasis PHP untuk semua jenis website
 
 Version: 3.0
-Last Update: 2017-04-13
+Last Update: 2017-04-23
 Author: [WebHade Creative](http://www.webhade.id)
 ___
 
@@ -67,3 +67,19 @@ Feel free to contribute to this project
 kunjungi website kami untuk informasi lebih lanjut
 
 [akane.webhade.com](http://akane.webhade.com)
+
+### Change Log
+
+v.3.0 Master Release
+- configuration
+- base class & runner
+- base controller
+- base model
+- database handler (pdo)
+- layout handler
+- http handler untuk redirect & uri segmentation
+- session handler
+- curl helper
+- common helper
+- phinx for migration tools
+- contoh controller, model, and view
