@@ -20,6 +20,11 @@ class AssetHelper
         return '<script '.($async ? 'async' : '').' type="text/javascript" src="'.$jsurl.'"></script>';
     }
 
+    public function inlinejs($javascript, $async = false)
+    {
+        return '<script '.($async ? 'async' : '').' type="text/javascript">'.$javascript.'</script>';
+    }
+
     public function css($filename, $media = 'screen')
     {
         $f = __DIR__ . '/../..' . $this->getPath('css').$filename;
@@ -34,11 +39,6 @@ class AssetHelper
     public function extcss($cssurl, $media = 'screen')
     {
         return '<link rel="stylesheet" href="'.$cssurl.'" media="'.$media.'">';
-    }
-
-    public function inlinejs($javascript, $async = false)
-    {
-        return '<script '.($async ? 'async' : '').' type="text/javascript">'.$javascript.'</script>';
     }
 
     public function inlinecss($css, $media = 'screen')
