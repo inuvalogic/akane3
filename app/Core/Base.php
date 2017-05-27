@@ -24,16 +24,20 @@ class Base
 	
 	public function __get($name)
 	{
-		// $arr = preg_split('/(?=[A-Z])/',$str);
+		$arr = preg_split('/(?=[A-Z])/',$name);
 
-		$modelClass = '\Akane\\Model\\'.ucwords($name);
+		if (isset($arr[1])){
+			$fqnClass = '\Akane\\' . $arr[1] . '\\'.ucfirst($name);
+		} else {
+			$fqnClass = '\Akane\\Model\\'.ucfirst($name);
+		}
 
-		if (class_exists($modelClass))
+		if (class_exists($fqnClass))
 		{
 			$container = $this->getContainer();
-			return new $modelClass($container);
+			return new $fqnClass($container);
 		} else {
-			throw new \Exception("Invalid Model Name <b>" . $name . "</b>");
+			throw new \Exception("Invalid Class Name <b>" . $name . "</b>");
 		}
 	}
 }
