@@ -6,8 +6,11 @@ class Layout extends \Akane\Core\Base
 {
 	public function render($template_name, array $template_args = array())
     {
+
         $filename = $this->getTemplateFile($template_name);
         if (file_exists($filename)){
+            $container = $this->getContainer();
+            $akane = $container->getAll();
             extract($template_args);
             ob_start();
             include $filename;

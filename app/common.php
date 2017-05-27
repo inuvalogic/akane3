@@ -24,5 +24,6 @@ $classes = array(
     'Helper' => array(
         'Common',
         'Curl',
+        'Asset',
     ),
 );
