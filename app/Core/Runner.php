@@ -26,34 +26,7 @@ class Runner
 
         self::loadClass($container, $this->classes);
 
-        $suri = $_SERVER['REQUEST_URI'];
-        $p = parse_url($suri);
-        $uri = trim($p['path'], '/');
-
-        if (!empty($uri)){
-            $routes = explode('/', $uri);
-            $op = '';
-            if (count($routes)>0){
-                $op = $routes[0];
-                if (isset($routes[1])){
-                    $act = $routes[1];
-                } else {
-                    $act = 'index';
-                }
-                $method = $act.'Action';
-                $classname = '\Akane\Controller\\'.ucwords($op).'Controller';
-                if (class_exists($classname) && method_exists($classname, $method)){
-                    $class = new $classname($container);
-                    $class->{$method}();
-                } else {
-                    $class = new \Akane\Controller\PageController($container);
-                    $class->notfoundAction();
-                }
-            }
-        } else {
-            $class = new \Akane\Controller\HomeController($container);
-            $class->indexAction();
-        }
+        Router::parse($container);
     }
 
     public function initClass($classes)
