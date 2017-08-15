@@ -70,7 +70,13 @@ kunjungi website kami untuk informasi lebih lanjut
 
 ### Change Log
 
-v.3.0 Master Release
+v.3.0.1 (Jun 10, 2017)
+- autoload class
+- assets helper
+- move curl helper
+- router
+
+v.3.0 Master Release (Apr 23, 2017)
 - configuration
 - base class & runner
 - base controller
