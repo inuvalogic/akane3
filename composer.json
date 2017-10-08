@@ -3,7 +3,7 @@
     "description": "Akane a PHP based framework for all purpose website types.",
     "keywords": ["akane", "framework"],
     "homepage": "http://akane.webhade.com",
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "authors": [{
         "name": "Wisnu Hafid",
