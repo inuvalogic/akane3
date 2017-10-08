@@ -6,7 +6,7 @@ class AssetHelper
 {
 	public function js($filename, $async = false)
     {
-        $f = __DIR__ . '/../..' . $this->getPath('js').$filename;
+        $f = '.' . $this->getPath('js').$filename;
 
         $filemtime = '';
         if (file_exists($f)){
@@ -27,13 +27,14 @@ class AssetHelper
 
     public function css($filename, $media = 'screen')
     {
-        $f = __DIR__ . '/../..' . $this->getPath('css').$filename;
+        $f = '.' . $this->getPath('css').$filename;
 
         $filemtime = '';
         if (file_exists($f)){
             $filemtime = filemtime($f);
             return '<link rel="stylesheet" href="'.$this->getPath('css').$filename.'?'.$filemtime.'" media="'.$media.'">';
         }
+        
     }
 
     public function extcss($cssurl, $media = 'screen')

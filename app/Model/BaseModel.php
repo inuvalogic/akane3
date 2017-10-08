@@ -1,6 +1,6 @@
 <?php
 
-namespace Akane\Core;
+namespace Akane\Model;
 
 class BaseModel extends \Akane\Core\Base
 {
@@ -9,11 +9,7 @@ class BaseModel extends \Akane\Core\Base
 	public function all() {
         $sql = "SELECT * FROM `" . $this->getTableName() . "`";
         $q = $this->db->pdo->prepare($sql);
-        if ($data!=false){
-            $q->execute($data);
-        } else {
-            $q->execute();
-        }
+        $q->execute();
         return $q->fetchAll();
     }
 

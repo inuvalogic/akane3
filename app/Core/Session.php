@@ -21,7 +21,7 @@ class Session
         
         ini_set('session.gc_maxlifetime', '14400');
 
-        session_name('KB_SID');
+        session_name('AK_SID');
         session_start();
 
         $this->setStorage($_SESSION);

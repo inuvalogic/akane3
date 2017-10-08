@@ -22,7 +22,14 @@ class Layout extends \Akane\Core\Base
 
     public function getTemplateFile($template)
     {
-        return implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'Template', $template.'.php'));
+        $appview = implode(DIRECTORY_SEPARATOR, array('app', 'Template', $template.'.php'));
+        $coreview = implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'Template', $template.'.php'));
+
+        if (file_exists($appview)){
+            return $appview;
+        } else {
+            return $coreview;
+        }
     }
     
     public function renderJson($output=array())
