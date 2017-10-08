@@ -14,6 +14,8 @@ class Runner
 
 	public function boot()
     {
+        include __DIR__.'/../common.php';
+        
         $session = new Session;
         $session->open();
 
@@ -23,10 +25,13 @@ class Runner
         $container = new Container;
         $container->register('session', $session);
         $container->register('db', $db);
+        
+        $this->initClass($classes);
 
         self::loadClass($container, $this->classes);
 
         Router::parse($container);
+
     }
 
     public function initClass($classes)

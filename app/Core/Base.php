@@ -32,6 +32,15 @@ class Base
 			$fqnClass = '\Akane\\Model\\'.ucfirst($name);
 		}
 
+		if (!class_exists($fqnClass))
+		{
+			if (isset($arr[1])){
+				$fqnClass = '\Akaneapp\\' . $arr[1] . '\\'.ucfirst($name);
+			} else {
+				$fqnClass = '\Akaneapp\\Model\\'.ucfirst($name);
+			}
+		}
+		
 		if (class_exists($fqnClass))
 		{
 			$container = $this->getContainer();
