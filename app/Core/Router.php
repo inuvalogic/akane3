@@ -4,6 +4,8 @@ namespace Akane\Core;
 
 class Router
 {
+	public $routes;
+
 	public static function loadIndex(Container $container)
 	{
 		$appclassname = '\\Akaneapp\\Controller\\HomeController';
@@ -22,18 +24,28 @@ class Router
         $class->notfoundAction();
 	}
 
-	public static function parse(Container $container)
+	public static function setRoutes($new_routes)
 	{
-		$routes = [];
-		
+		$this->routes = array_merge($this->routes, $new_routes);
+	}
+
+	public static function loadRoutes()
+	{
 		$routes_file = APP_CONFIG_DIR.'routes.php';
 		if (file_exists($routes_file)){
 			include $routes_file;
 		}
 
+		if (isset($routes) && is_array($routes)){
+			$this->setRoutes($routes);		
+		}
+	}
+
+	public static function parse(Container $container)
+	{
         $notfound = false;
         
-		if (isset($routes) && is_array($routes))
+		if (is_array($this->routes))
 		{
 	        $suri = $_SERVER['REQUEST_URI'];
 	        $p = parse_url($suri);
@@ -41,7 +53,7 @@ class Router
 
 	        if (!empty($uri))
 	        {
-				foreach ($routes as $from => $to)
+				foreach ($this->routes as $from => $to)
 	            {
 					if (preg_match('#^'.$from.'$#', $uri))
 	                {
