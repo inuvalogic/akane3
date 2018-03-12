@@ -20,6 +20,7 @@ class Http
             $segment = explode('/',$uri);
             if (count($segment) > 0){
                 if (isset($segment[$s])){
+                    $segment[$s] = filter_var($segment[$s], FILTER_SANITIZE_STRING);
                     return $segment[$s];
                 }
             }

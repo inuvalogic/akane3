@@ -50,6 +50,7 @@ class Router
 	        $suri = $_SERVER['REQUEST_URI'];
 	        $p = parse_url($suri);
 	        $uri = trim($p['path'], '/');
+        	$uri = filter_var($uri, FILTER_SANITIZE_STRING);
 
 	        if (!empty($uri))
 	        {
