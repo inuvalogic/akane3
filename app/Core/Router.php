@@ -4,9 +4,9 @@ namespace Akane\Core;
 
 class Router
 {
-	public static $routes;
+	public $routes = array();
 
-	public static function loadIndex(Container $container)
+	public function loadIndex(Container $container)
 	{
 		$appclassname = '\\Akaneapp\\Controller\\HomeController';
 		if (class_exists($appclassname)){
@@ -18,18 +18,18 @@ class Router
     	}
 	}
 
-	public static function loadNotFound(Container $container)
+	public function loadNotFound(Container $container)
 	{
 		$class = new \Akane\Controller\PageController($container);
         $class->notfoundAction();
 	}
 
-	public static function setRoutes($new_routes)
+	public function setRoutes($new_routes)
 	{
 		$this->routes = array_merge($this->routes, $new_routes);
 	}
 
-	public static function loadRoutes()
+	public function loadRoutes()
 	{
 		$routes_file = APP_CONFIG_DIR.'routes.php';
 		if (file_exists($routes_file)){
@@ -41,11 +41,11 @@ class Router
 		}
 	}
 
-	public static function parse(Container $container)
+	public function parse(Container $container)
 	{
         $notfound = false;
         
-		if (is_array(self::$routes))
+		if (is_array($this->routes))
 		{
 	        $suri = $_SERVER['REQUEST_URI'];
 	        $p = parse_url($suri);
@@ -86,11 +86,11 @@ class Router
 	            }
 
 	            if ($notfound==true){
-	            	self::loadNotFound($container);
+	            	$this->loadNotFound($container);
 	            }
 
             } else {
-            	self::loadIndex($container);
+            	$this->loadIndex($container);
             }
 		}
 	}
