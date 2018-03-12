@@ -4,7 +4,7 @@ namespace Akane\Core;
 
 class Router
 {
-	public $routes;
+	public static $routes;
 
 	public static function loadIndex(Container $container)
 	{
@@ -45,7 +45,7 @@ class Router
 	{
         $notfound = false;
         
-		if (is_array($this->routes))
+		if (is_array(self::$routes))
 		{
 	        $suri = $_SERVER['REQUEST_URI'];
 	        $p = parse_url($suri);
