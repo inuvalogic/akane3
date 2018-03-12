@@ -4,8 +4,11 @@ namespace Akane\Core;
 
 class Layout extends \Akane\Core\Base
 {
-	public function render($template_name, array $template_args = array())
+    private $hooks = array();
+
+    public function render($template_name, array $template_args = array())
     {
+        extract($this->hooks);
 
         $filename = $this->getTemplateFile($template_name);
         if (file_exists($filename)){
@@ -36,5 +39,10 @@ class Layout extends \Akane\Core\Base
     {
         header('Content-type: application/json');
         echo json_encode($output);
+    }
+
+    public function setHook($name, $value)
+    {
+        $this->hooks[$name] = $value;
     }
 }
