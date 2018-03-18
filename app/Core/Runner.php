@@ -30,7 +30,9 @@ class Runner
 
         self::loadClass($container, $this->classes);
 
-        Router::parse($container);
+        $router = new Router;
+        $router->loadRoutes();
+        $router->parse($container);
 
     }
 

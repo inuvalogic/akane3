@@ -1,13 +1,30 @@
 <?php
 
-namespace Akane\Model;
+namespace Akane\Core;
 
 class BaseModel extends \Akane\Core\Base
 {
     const TABLE_NAME = '';
+    const SEARCH_COLUMNS = array('id');
 
-	public function all() {
-        $sql = "SELECT * FROM `" . $this->getTableName() . "`";
+    public function get($id, $primary_key_column='id') {
+        $sql = "SELECT * FROM `" . $this->getTableName() . "` WHERE `".$primary_key_column."` = ?";
+        $q = $this->db->pdo->prepare($sql);
+        $q->execute(array($id));
+        return $q->fetch();
+    }
+
+    public function all($order = '', $limit='')
+    {
+        if ($order!=''){
+            $order = ' ORDER BY '.$order;
+        }
+
+        if ($limit!=''){
+            $limit = ' LIMIT '.$limit;
+        }
+
+        $sql = "SELECT * FROM `" . $this->getTableName() . "`".$order.$limit;
         $q = $this->db->pdo->prepare($sql);
         $q->execute();
         return $q->fetchAll();
@@ -23,9 +40,13 @@ class BaseModel extends \Akane\Core\Base
         return $q->fetchAll();
     }
     
-    public function getSingleData($sql, $data) {
+    public function getSingleData($sql, $data = false) {
         $q = $this->db->pdo->prepare($sql);
-        $q->execute($data);
+        if ($data!=false){
+            $q->execute($data);
+        } else {
+            $q->execute();
+        }
         return $q->fetch();
     }
 
@@ -34,6 +55,13 @@ class BaseModel extends \Akane\Core\Base
         $reflector = new \ReflectionClass(get_called_class());
         $table_name = $reflector->getConstant('TABLE_NAME');
         return $table_name;
+    }
+
+    public function getSearchableColumns()
+    {
+        $reflector = new \ReflectionClass(get_called_class());
+        $column_name = $reflector->getConstant('SEARCH_COLUMNS');
+        return $column_name;
     }
 
     public function insert($data)
@@ -79,6 +107,7 @@ class BaseModel extends \Akane\Core\Base
             return true;
         } catch(\PDOException $e)
         {
+            echo $e->getMessage();
             return false;
         }
     }
@@ -163,5 +192,64 @@ class BaseModel extends \Akane\Core\Base
         {
             return false;
         }
+    }
+
+    public function find($keyword, $order='', $limit='')
+    {
+        if (empty($keyword)){
+            throw new \Exception("keyword cannot be null, must be given for find action");
+            exit;
+        }
+        
+        $table_columns = $this->getSearchableColumns();
+
+        if (!is_array($table_columns)){
+            throw new \Exception("wrong table_columns given for find action, must be an Array");
+            exit;
+        }
+
+        if ($order!=''){
+            $order = ' ORDER BY '.$order;
+        }
+
+        if ($limit!=''){
+            $limit = ' LIMIT '.$limit;
+        }
+
+        $find_query = array();
+        foreach ($table_columns as $col) {
+            $find_query[] = "
+            `".$col."` LIKE CONCAT(:key, '%') OR
+            `".$col."` LIKE CONCAT('%', :key, '%') OR
+            `".$col."` LIKE CONCAT('%', :key)";
+        }
+
+        $find_queries = implode(' OR ', $find_query);
+        $sql = "SELECT * FROM `" . $this->getTableName() . "` WHERE (".$find_queries.")".$order.$limit;
+        return $this->findData($sql, array(':key' => $keyword));
+    }
+
+    public function findData($sql, $bindparams)
+    {
+        if (!is_array($bindparams)){
+            throw new \Exception("wrong bindparams type given for find action, must be an Array");
+            exit;
+        }
+        
+        $q = $this->db->pdo->prepare($sql);
+
+        foreach ($bindparams as $key => $value)
+        {
+            $q->bindParam($key, $value);
+        }
+
+        $q->execute();
+        
+        return $q->fetchAll();
+    }
+
+    public function getLastInsertId()
+    {
+        return $this->db->pdo->lastInsertId();
     }
 }

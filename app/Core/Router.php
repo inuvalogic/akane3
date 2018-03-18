@@ -4,7 +4,9 @@ namespace Akane\Core;
 
 class Router
 {
-	public static function loadIndex(Container $container)
+	public $routes = array();
+
+	public function loadIndex(Container $container)
 	{
 		$appclassname = '\\Akaneapp\\Controller\\HomeController';
 		if (class_exists($appclassname)){
@@ -16,32 +18,43 @@ class Router
     	}
 	}
 
-	public static function loadNotFound(Container $container)
+	public function loadNotFound(Container $container)
 	{
 		$class = new \Akane\Controller\PageController($container);
         $class->notfoundAction();
 	}
 
-	public static function parse(Container $container)
+	public function setRoutes($new_routes)
 	{
-		$routes = [];
-		
+		$this->routes = array_merge($this->routes, $new_routes);
+	}
+
+	public function loadRoutes()
+	{
 		$routes_file = APP_CONFIG_DIR.'routes.php';
 		if (file_exists($routes_file)){
 			include $routes_file;
 		}
 
+		if (isset($routes) && is_array($routes)){
+			$this->setRoutes($routes);		
+		}
+	}
+
+	public function parse(Container $container)
+	{
         $notfound = false;
         
-		if (isset($routes) && is_array($routes))
+		if (is_array($this->routes))
 		{
 	        $suri = $_SERVER['REQUEST_URI'];
 	        $p = parse_url($suri);
 	        $uri = trim($p['path'], '/');
+        	$uri = filter_var($uri, FILTER_SANITIZE_STRING);
 
 	        if (!empty($uri))
 	        {
-				foreach ($routes as $from => $to)
+				foreach ($this->routes as $from => $to)
 	            {
 					if (preg_match('#^'.$from.'$#', $uri))
 	                {
@@ -73,11 +86,11 @@ class Router
 	            }
 
 	            if ($notfound==true){
-	            	self::loadNotFound($container);
+	            	$this->loadNotFound($container);
 	            }
 
             } else {
-            	self::loadIndex($container);
+            	$this->loadIndex($container);
             }
 		}
 	}
