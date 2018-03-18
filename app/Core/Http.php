@@ -12,7 +12,7 @@ class Http
 
 	public static function uri_segment($s = 0)
 	{
-        $uri = $_SERVER['REQUEST_URI'];
+        $suri = $_SERVER['REQUEST_URI'];
         $parse = parse_url($suri);
         $uri = trim($parse['path'],'/');
         if (!empty($uri))
