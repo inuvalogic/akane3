@@ -288,7 +288,7 @@ class Common
             }
             for ($i = $page_min;$i <= $page_max;$i++) {
                 if ($i == $paged){
-                    $show_page .= '<li class="page-item"><a class="page-link active" href="#">'.$i.'</a></li>';
+                    $show_page .= '<li class="page-item active"><a class="page-link" href="#">'.$i.'</a></li>';
                 }else{
                     $url = str_replace('[[paged]]',$i,$urls);
                     $show_page .= '<li class="page-item"><a class="page-link" href="'.$url.'">'.$i.'</a></li>';
