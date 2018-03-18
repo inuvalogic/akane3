@@ -1,6 +1,6 @@
 <?php
 
-namespace Akane\Core;
+namespace Akane\Model;
 
 class BaseModel extends \Akane\Core\Base
 {
