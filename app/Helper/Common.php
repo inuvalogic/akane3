@@ -291,7 +291,7 @@ class Common
                     $show_page .= '<li class="page-item"><a class="page-link active" href="#">'.$i.'</a></li>';
                 }else{
                     $url = str_replace('[[paged]]',$i,$urls);
-                    $show_page .= '<li class="page-item"><a class="page-link" href="'.$url.'"><span class="border radius">'.$i.'</span></a></li>';
+                    $show_page .= '<li class="page-item"><a class="page-link" href="'.$url.'">'.$i.'</a></li>';
                 }
             }
             if (($paged < ($totalpage - $range_max)) && ($totalpage > $range)) {
