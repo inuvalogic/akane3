@@ -14,7 +14,8 @@ class Http
 	{
         $suri = $_SERVER['REQUEST_URI'];
         $parse = parse_url($suri);
-        $uri = trim($parse['path'],'/');
+        $uri = ltrim($parse['path'],'/');
+
         if (!empty($uri))
         {
             $segment = explode('/',$uri);
