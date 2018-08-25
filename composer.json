@@ -11,6 +11,15 @@
         "homepage": "http://wisnu-hafid.net",
         "role": "Developer"
     }],
+    "repositories": {
+        "akane3": {
+            "type": "path",
+            "url": "/h/htdocs/akane3",
+            "options": {
+                "symlink": true
+            }
+        }
+    },
     "require": {
         "php" : ">=5.3.9",
         "ext-gd" : "*",
