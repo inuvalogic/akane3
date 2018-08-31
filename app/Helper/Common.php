@@ -165,7 +165,7 @@ class Common
 				$basefile = basename($_FILES[$filename]['name']);
 				$fi = explode('.',$basefile);
 
-				$newname = $prefix.'-'.self::encode_text_url($fi[0]).'.'.$fi[1];
+				$newname = $prefix.'-'.self::seo_url($fi[0]).'.'.$fi[1];
 				$uploadfile = $dir.$newname;
 				$upload['gfile'] = $newname;
 				
