@@ -7,14 +7,19 @@ class BaseModel extends \Akane\Core\Base
     const TABLE_NAME = '';
     const SEARCH_COLUMNS = array('id');
 
-    public function get($id, $primary_key_column='id') {
+    public function get($id, $primary_key_column='id', $single=true)
+    {
         $sql = "SELECT * FROM `" . $this->getTableName() . "` WHERE `".$primary_key_column."` = ?";
         $q = $this->db->pdo->prepare($sql);
         $q->execute(array($id));
-        return $q->fetch();
+        if ($single==true){
+            return $q->fetch();
+        } else {
+            return $q->fetchAll();
+        }
     }
 
-    public function all($order = '', $limit='')
+    public function all($order = '', $limit='', $where = false)
     {
         if ($order!=''){
             $order = ' ORDER BY '.$order;
@@ -24,9 +29,44 @@ class BaseModel extends \Akane\Core\Base
             $limit = ' LIMIT '.$limit;
         }
 
-        $sql = "SELECT * FROM `" . $this->getTableName() . "`".$order.$limit;
+        $sql = "SELECT * FROM `" . $this->getTableName() . "`";
+        
+        if ($where!=false && is_array($where))
+        {
+            $columnswhere = array_keys($where);
+            array_walk($columnswhere, function(&$valuew, &$keyw) {
+                $valuew = '`'.$valuew.'` = ?';
+            });
+
+            $sql .= " WHERE ";
+            $sql .= implode(',', $columnswhere);
+
+            $wherevalues = array();
+
+            foreach ($where as $key2 => $value2) {
+                if (strtolower($value2)=='now()'){
+                    $wherevalues[] = 'NOW()';
+                } else {
+                    $wherevalues[] = $value2;
+                }
+            }
+            
+            $params = $wherevalues;
+        }
+        
+        $sql .= $order.$limit;
+
         $q = $this->db->pdo->prepare($sql);
+
+        if ($where!=false && is_array($where))
+        {
+            for($a=0; $a < count($params); $a++){
+                $q->bindParam($a+1, $params[$a]);
+            }
+        }
+
         $q->execute();
+
         return $q->fetchAll();
     }
 
