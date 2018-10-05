@@ -147,7 +147,7 @@ class BaseModel extends \Akane\Core\Base
             return true;
         } catch(\PDOException $e)
         {
-            echo $e->getMessage();
+            // echo $e->getMessage();
             return false;
         }
     }
@@ -166,44 +166,36 @@ class BaseModel extends \Akane\Core\Base
 
         try
         {            
-            $columns = array_keys($setdata);
-            $columnswhere = array_keys($where);
+            $columns = array();
+            $columnswhere = array();
+            $values = array();
+            $wheres = array();
 
-            array_walk($columns, function(&$value, &$key) {
-                $value = '`'.$value.'` = ?';
-            });
+            foreach ($setdata as $key => $value) {
+                if (strtolower($value)=='now()'){
+                    $columns[] = '`'.$key.'` = NOW()';
+                } else {
+                    $columns[] = '`'.$key.'` = ?';
+                    $values[] = $value;
+                }
+            }
 
-            array_walk($columnswhere, function(&$valuew, &$keyw) {
-                $valuew = '`'.$valuew.'` = ?';
-            });
+            foreach ($where as $keyw => $valuew) {
+                if (strtolower($value)=='now()'){
+                    $columnswhere[] = '`'.$keyw.'` = NOW()';
+                } else {
+                    $columnswhere[] = '`'.$keyw.'` = ?';
+                    $wheres[] = $valuew;
+                }
+            }
 
             $sql = "UPDATE `" . $this->getTableName() . "` SET ";
             $sql .= implode(',', $columns);
             $sql .= " WHERE ";
             $sql .= implode(',', $columnswhere);
             $sql .= ";";
-            
-            $values = array();
 
-            foreach ($setdata as $key => $value) {
-                if (strtolower($value)=='now()'){
-                    $values[] = 'NOW()';
-                } else {
-                    $values[] = $value;
-                }
-            }
-
-            $wherevalues = array();
-
-            foreach ($where as $key2 => $value2) {
-                if (strtolower($value2)=='now()'){
-                    $wherevalues[] = 'NOW()';
-                } else {
-                    $wherevalues[] = $value2;
-                }
-            }
-            
-            $params = array_merge($values, $wherevalues);
+            $params = array_merge($values, $wheres);
 
             $q = $this->db->pdo->prepare($sql);
 
@@ -216,6 +208,7 @@ class BaseModel extends \Akane\Core\Base
             return true;
         } catch(\PDOException $e)
         {
+            // echo $e->getMessage();
             return false;
         }
     }
@@ -230,6 +223,7 @@ class BaseModel extends \Akane\Core\Base
             return true;
         } catch(\PDOException $e)
         {
+            // echo $e->getMessage();
             return false;
         }
     }
