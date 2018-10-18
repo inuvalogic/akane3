@@ -18,7 +18,7 @@
         "ext-json" : "*",
         "ext-filter" : "*",
         "ext-session" : "*",
-        "robmorgan/phinx": "dev-master"
+        "robmorgan/phinx": "*"
     },
 	"autoload" : {
         "classmap" : ["app/"],
