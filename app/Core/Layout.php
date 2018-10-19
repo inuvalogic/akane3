@@ -37,11 +37,11 @@ class Layout extends \Akane\Core\Base
             
             $template = str_replace($plugin.':', '', $template);
 
-            $appview = implode(DIRECTORY_SEPARATOR, array('app', 'Plugins', $plugin, 'Template', $template.'.php'));
+            $appview = implode(DIRECTORY_SEPARATOR, array(__DIR__,'..','..','..','..','..','app', 'Plugins', $plugin, 'Template', $template.'.php'));
             $coreview = implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'Plugins', $plugin, 'Template', $template.'.php'));
 
         } else {
-            $appview = implode(DIRECTORY_SEPARATOR, array('app', 'Template', $template.'.php'));
+            $appview = implode(DIRECTORY_SEPARATOR, array(__DIR__,'..','..','..','..','..','app', 'Template', $template.'.php'));
             $coreview = implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'Template', $template.'.php'));
         }
 

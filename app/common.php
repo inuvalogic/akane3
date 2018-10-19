@@ -5,9 +5,9 @@ date_default_timezone_set('Asia/Jakarta');
 $global   = __DIR__.'/Config/global.php';
 $database = __DIR__.'/Config/database.php';
 $language = __DIR__.'/Config/language.php';
-$appglobal   = 'app/Config/global.php';
-$appdatabase = 'app/Config/database.php';
-$applanguage = 'app/Config/language.php';
+$appglobal   = __DIR__ . '/../../../../app/Config/global.php';
+$appdatabase = __DIR__ . '/../../../../app/Config/database.php';
+$applanguage = __DIR__ . '/../../../../app/Config/language.php';
 
 if (file_exists($appglobal)){
 	require $appglobal;
