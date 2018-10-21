@@ -39,7 +39,7 @@ class BaseModel extends \Akane\Core\Base
             });
 
             $sql .= " WHERE ";
-            $sql .= implode(',', $columnswhere);
+            $sql .= implode(' AND ', $columnswhere);
 
             $wherevalues = array();
 
