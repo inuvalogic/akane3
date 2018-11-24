@@ -162,9 +162,6 @@ class Common
 				$upload['error'] = 'Cannot upload file size more than 10 MB, given file size is <b>'.sizeFilter($_FILES[$filename]['size']).'</b>';
 			} else {
 				
-				$basefile = basename($_FILES[$filename]['name']);
-				$fi = explode('.',$basefile);
-
                 if ($prefix!=''){
                     $prefix = self::seo_url($prefix).'-';
                 }
