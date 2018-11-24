@@ -165,9 +165,22 @@ class Common
 				$basefile = basename($_FILES[$filename]['name']);
 				$fi = explode('.',$basefile);
 
-				$newname = $prefix.'-'.self::seo_url($fi[0]).'.'.$fi[1];
-				$uploadfile = $dir.$newname;
-				$upload['gfile'] = $newname;
+                if ($prefix!=''){
+                    $prefix = self::seo_url($prefix).'-';
+                }
+                
+                $str = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
+                $random = str_shuffle($str);
+                $hash = hash('adler32',$random);
+                
+                $basename = strtolower(basename($_FILES[$filename]['name']));
+                $ext = pathinfo($basename, PATHINFO_EXTENSION);
+                $filename_non_ext = str_replace('.'.$ext, '', $basename);
+
+                $newname = $prefix.$hash.'-'.self::seo_url($filename_non_ext).'.'.$ext;
+                
+                $uploadfile = strtolower($dir.$newname);
+                $upload['gfile'] = strtolower($newname);
 				
 				$do_upload = move_uploaded_file($_FILES[$filename]['tmp_name'], $uploadfile);
 				
