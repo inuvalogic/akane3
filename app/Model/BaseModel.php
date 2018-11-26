@@ -271,13 +271,7 @@ class BaseModel extends \Akane\Core\Base
         }
         
         $q = $this->db->pdo->prepare($sql);
-
-        foreach ($bindparams as $key => $value)
-        {
-            $q->bindParam($key, $value);
-        }
-
-        $q->execute();
+        $q->execute($bindparams);
         
         return $q->fetchAll();
     }
