@@ -181,7 +181,7 @@ class BaseModel extends \Akane\Core\Base
             }
 
             foreach ($where as $keyw => $valuew) {
-                if (strtolower($value)=='now()'){
+                if (strtolower($valuew)=='now()'){
                     $columnswhere[] = '`'.$keyw.'` = NOW()';
                 } else {
                     $columnswhere[] = '`'.$keyw.'` = ?';
