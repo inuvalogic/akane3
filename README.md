@@ -6,12 +6,12 @@ Sebuah Framework sederhana berbasis PHP untuk semua tipe website
 
 Version: 3.0.2
 Last Update: 2017-10-08
-Author: [WebHade Creative](http://www.webhade.id)
+Author: [WebHade Creative](http://www.webhadecreative.com)
 ___
 
 ### Kebutuhan Minimum
 
-1. PHP 5.3.9 keatas
+1. PHP 5.3.9 keatas (disarankan > 7.2)
 2. MySQL / MariaDB
 3. Composer
 
