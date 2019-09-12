@@ -35,27 +35,31 @@ class Cli
                 'command_desc' => '',
             ),
             array(
-                'command' => 'migration create [CamelCaseClassName]',
+                'command' => 'mig',
+                'command_desc' => 'Show all migration available commands',
+            ),
+            array(
+                'command' => 'mig create [CamelCaseClassName]',
                 'command_desc' => 'Create new migration',
             ),
             array(
-                'command' => 'migration status',
+                'command' => 'mig status',
                 'command_desc' => 'Show migration status',
             ),
             array(
-                'command' => 'migration migrate',
+                'command' => 'mig migrate',
                 'command_desc' => 'Run migration up',
             ),
             array(
-                'command' => 'migration rollback',
+                'command' => 'mig rollback',
                 'command_desc' => 'Run migration down (revert)',
             ),
             array(
-                'command' => 'migration seed:run',
+                'command' => 'mig seed:run',
                 'command_desc' => 'Run all seeder',
             ),
             array(
-                'command' => 'migration seed:run -S [SeederClassname]',
+                'command' => 'mig seed:run -S [SeederClassname]',
                 'command_desc' => 'Run specific seeder classname',
             ),
         );
@@ -126,8 +130,9 @@ class Cli
         passthru(PHP_BINARY . " -S {$host}:{$port} -t public_html public_html/app.php 2>&1");
     }
 
-    public function migrationTools($arguments)
+    public function migrationTools()
     {
-        passthru("sh vendor/bin/phinx ".$arguments);
+        $phinx = new \Phinx\Console\PhinxApplication('- For Akane Framework v3');
+        $phinx->run();
     }
 }
