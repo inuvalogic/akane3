@@ -8,19 +8,19 @@ if (!defined('MAIL_LOGS')){
 if (!defined('MAIL_FROM')){
     define('MAIL_FROM', 'akane@webhade.com');
 }
-if (!defined('')){
+if (!defined('MAIL_FROM_NAME')){
     define('MAIL_FROM_NAME', 'Akane');
 }
-if (!defined('')){
+if (!defined('MAIL_SMTP_HOSTNAME')){
     define('MAIL_SMTP_HOSTNAME', 'smtp.mailtrap.io');
 }
-if (!defined('')){
+if (!defined('MAIL_SMTP_USERNAME')){
     define('MAIL_SMTP_USERNAME', null);
 }
-if (!defined('')){
+if (!defined('MAIL_SMTP_PASSWORD')){
     define('MAIL_SMTP_PASSWORD', null);
 }
-if (!defined('')){
+if (!defined('MAIL_SMTP_PORT')){
     define('MAIL_SMTP_PORT', 2525);
 }
 if (!defined('MAILGUN_KEY')){
