@@ -19,7 +19,7 @@ class Layout extends \Akane\Core\Base
             include $filename;
             return ob_get_clean();
         } else {
-            return 'Internal Error: No Template for <b>'.$template_name.'</b>';
+            return 'Internal Error: No Template for <b>'.$template_name.'</b> on path: '.$filename;
         }
     }
 

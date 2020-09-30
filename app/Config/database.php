@@ -15,3 +15,6 @@ if (!defined('DB_PASSWORD')){
 if (!defined('DB_NAME')){
     define('DB_NAME', 'akane3');
 }
+if (!defined('DB_ENCODING')){
+    define('DB_ENCODING', 'utf8');
+}

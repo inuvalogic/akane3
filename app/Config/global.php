@@ -15,3 +15,11 @@ if (!defined('CONFIG_DIR')){
 if (!defined('APP_CONFIG_DIR')){
 	define('APP_CONFIG_DIR' , 'app' . DS . 'Config' . DS);
 }
+
+if (!defined('APP_TIMEZONE')){
+	define('APP_TIMEZONE' , 'Asia/Jakarta');
+}
+
+if (!defined('DEBUG_MODE')){
+	define('DEBUG_MODE' , false);
+}
