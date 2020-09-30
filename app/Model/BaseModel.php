@@ -147,8 +147,11 @@ class BaseModel extends \Akane\Core\Base
             return true;
         } catch(\PDOException $e)
         {
-            // echo $e->getMessage();
-            return false;
+            if (DEBUG_MODE == true){
+                return array('status' => false, 'message' => $e->getMessage());
+            } else {
+                return false;
+            }
         }
     }
 
@@ -208,8 +211,11 @@ class BaseModel extends \Akane\Core\Base
             return true;
         } catch(\PDOException $e)
         {
-            // echo $e->getMessage();
-            return false;
+            if (DEBUG_MODE == true){
+                return array('status' => false, 'message' => $e->getMessage());
+            } else {
+                return false;
+            }
         }
     }
 
@@ -223,8 +229,11 @@ class BaseModel extends \Akane\Core\Base
             return true;
         } catch(\PDOException $e)
         {
-            // echo $e->getMessage();
-            return false;
+            if (DEBUG_MODE == true){
+                return array('status' => false, 'message' => $e->getMessage());
+            } else {
+                return false;
+            }
         }
     }
 

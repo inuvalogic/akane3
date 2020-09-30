@@ -30,10 +30,13 @@ class Runner
 
         self::loadClass($container, $this->classes);
 
-        $router = new Router;
-        $router->loadRoutes();
-        $router->parse($container);
+        if (!isset($routes)){
+            $routes = array();
+        }
 
+        $router = new Router;
+        $router->loadRoutes($routes);
+        $router->parse($container);
     }
 
     public function initClass($classes)

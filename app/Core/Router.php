@@ -29,14 +29,9 @@ class Router
 		$this->routes = array_merge($this->routes, $new_routes);
 	}
 
-	public function loadRoutes()
+	public function loadRoutes($routes)
 	{
-		$routes_file = APP_CONFIG_DIR.'routes.php';
-		if (file_exists($routes_file)){
-			include $routes_file;
-		}
-
-		if (isset($routes) && is_array($routes)){
+		if (is_array($routes)){
 			$this->setRoutes($routes);		
 		}
 	}

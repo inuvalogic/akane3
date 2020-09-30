@@ -6,9 +6,9 @@
     "type": "library",
     "license": "MIT",
     "authors": [{
-        "name": "Wisnu Hafid",
-        "email": "wisnuhafid@gmail.com",
-        "homepage": "http://wisnu-hafid.net",
+        "name": "Webhade Creative",
+        "email": "webhadecreative@gmail.com",
+        "homepage": "https://webhadecreative.com",
         "role": "Developer"
     }],
     "require": {
@@ -18,7 +18,15 @@
         "ext-json" : "*",
         "ext-filter" : "*",
         "ext-session" : "*",
-        "robmorgan/phinx": "*"
+        "robmorgan/phinx": "*",
+        "mailgun/mailgun-php": "^3.0",
+        "php-http/guzzle6-adapter": "^2.0",
+        "php-http/message": "^1.8",
+        "kriswallsmith/buzz": "^1.1",
+        "nyholm/psr7": "^1.2",
+        "tijsverkoyen/css-to-inline-styles": "^2.2",
+        "symfony/yaml": "^5.0",
+        "phpmailer/phpmailer": "^6.1"
     },
 	"autoload" : {
         "classmap" : ["app/"],
